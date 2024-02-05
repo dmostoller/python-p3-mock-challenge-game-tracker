@@ -1,16 +1,12 @@
-from classes.result import Result
-
 
 class Player:
+
     all = []
 
     def __init__(self, username):
         self.username = username
 
-        Player.all.append(self)
-
-        self._games_played = []
-        self._results = []
+        self.__class__.all.append(self)
 
     @property
     def username(self):
@@ -23,54 +19,30 @@ class Player:
         else:
             raise Exception("Username must be a string beween 2-16 characters long")
 
-
     def results(self):
-        return self._results
-    
-    def add_result(self, new_result=None):
         from classes.result import Result
-        if isinstance(new_result, Result):
-            self._results.append(new_result)
-        else:
-            raise Exception("Result must be an instance of the Result class")
-    
-    results = property(results, add_result)
+        return [result for result in Result.all if result.player == self]    
 
     def games_played(self):
-        return self._games_played
-    
-    def add_game_played(self, new_game_played):
-        from classes.game import Game
-        if isinstance(new_game_played, Game):
-            self._games_played.append(new_game_played)
-        else:
-            raise Exception("Game must be an instance of the Game class")
+        return list(set([result.game for result in self.results()]))
 
     def played_game(self, game):
-        if game in self._results:    
-            return True
-        else:
-            return False
+        return game in self.games_played()    
+
     
-
     def num_times_played(self, game):
-        num_played = {}
-        for result in self._results:
-            if game == result.game.title:
-                if game not in num_played:
-                    num_played[game] = 1
-                else: 
-                    num_played[game] += 1
-                
-                return num_played[game]
-            else:
-                return "None"
-
-            
-
+       return len([result for result in self.results() if result.game == game])
+    
     @classmethod
     def highest_scored(cls, game):
-        pass
+        max_player = None
+        max_score = 0
+        for player in cls.all:
+            if player.played_game(game):
+                if game.average_score(player) > max_score:
+                    max_player = player
+                    max_score = game.average_score(player)
+        return max_player
 
 
     def __repr__(self):

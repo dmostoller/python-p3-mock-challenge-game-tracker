@@ -116,14 +116,14 @@ class TestPlayer:
         assert (player_2.num_times_played(game) == 0)
         assert (player_2.num_times_played(game_2) == 1)
 
-    # def test_highest_score(self):
-    #     '''which player has the highest average score for a given game'''
-    #     game = Game("Skribbl.io")
-    #     player = Player('Saaammmm')
-    #     player_2 = Player('ActuallyTopher')
-    #     Result(player, game, 2000)
-    #     Result(player, game, 19)
-    #     Result(player, game, 1900)
-    #     Result(player_2, game, 9)
+    def test_highest_score(self):
+        '''which player has the highest average score for a given game'''
+        game = Game("Skribbl.io")
+        player = Player('Saaammmm')
+        player_2 = Player('ActuallyTopher')
+        Result(player, game, 2000)
+        Result(player, game, 19)
+        Result(player, game, 1900)
+        Result(player_2, game, 9)
 
-    #     assert Player.highest_scored(game) == player
+        assert Player.highest_scored(game) == player
