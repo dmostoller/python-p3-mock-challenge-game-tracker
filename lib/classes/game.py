@@ -3,7 +3,7 @@ from classes.result import Result
 
 class Game:
     def __init__(self, title):
-        self._title = title
+        self.title = title
 
         self._players = []
         self._results = []
@@ -14,7 +14,7 @@ class Game:
     
     @title.setter
     def title(self, new_title):
-        if not hasattr(self, 'title') and isinstance(new_title, str) and 0 < len(self.title):
+        if not hasattr(self, 'title') and isinstance(new_title, str) and 0 < len(new_title):
             self._title = new_title
         else:
             raise Exception("Title must be a string greater than 0 characters, and cannot be changed once set.")

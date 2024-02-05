@@ -23,6 +23,6 @@ result2 = Result(peter, pokemon, 500)
 result3 = Result(beth, tetris, 4000)
 result4 = Result(dave, doom, 100)
 result5 = Result(peter, doom, 50)
-result6 = Result(beth, pokemon, 400)
+result6 = Result(beth, tetris, 400)
 
-print(dave.games_played())
+print(dave.num_times_played("Doom"))

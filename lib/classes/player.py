@@ -47,10 +47,26 @@ class Player:
             raise Exception("Game must be an instance of the Game class")
 
     def played_game(self, game):
-        pass
+        if game in self._results:    
+            return True
+        else:
+            return False
+    
 
     def num_times_played(self, game):
-        pass
+        num_played = {}
+        for result in self._results:
+            if game == result.game.title:
+                if game not in num_played:
+                    num_played[game] = 1
+                else: 
+                    num_played[game] += 1
+                
+                return num_played[game]
+            else:
+                return "None"
+
+            
 
     @classmethod
     def highest_scored(cls, game):
